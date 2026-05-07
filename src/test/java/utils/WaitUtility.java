@@ -38,6 +38,10 @@ public class WaitUtility {
         return webDriverWait().until(ExpectedConditions.alertIsPresent());
     }
 
+    public boolean untilUrlContains(String text) {
+        return webDriverWait().until(ExpectedConditions.urlContains(text));
+    }
+
     public <T> T fluentUntil(ExpectedCondition<T> condition) {
         return new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(timeout))

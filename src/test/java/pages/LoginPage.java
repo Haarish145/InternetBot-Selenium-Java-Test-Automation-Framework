@@ -46,7 +46,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoginPageDisplayed() {
-        return getText(pageHeading).contains("Login Page");
+        return waitUtility.untilUrlContains("/login") && getText(pageHeading).contains("Login Page");
     }
 
     public String getFlashMessage() {
