@@ -23,11 +23,11 @@ public class WaitUtility {
     }
 
     public WebElement untilVisible(WebElement element) {
-        return webDriverWait().until(ExpectedConditions.visibilityOf(element));
+        return webDriverWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
     public WebElement untilClickable(WebElement element) {
-        return webDriverWait().until(ExpectedConditions.elementToBeClickable(element));
+        return webDriverWait().until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(element)));
     }
 
     public boolean untilInvisible(WebElement element) {
@@ -49,6 +49,9 @@ public class WaitUtility {
     }
 
     private WebDriverWait webDriverWait() {
-        return new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        wait.ignoring(NoSuchElementException.class);
+        wait.ignoring(StaleElementReferenceException.class);
+        return wait;
     }
 }

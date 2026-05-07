@@ -37,6 +37,7 @@ public final class DriverFactory {
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions options = new EdgeOptions();
                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                options.addArguments("--window-size=1440,1000");
                 if (headless) {
                     options.addArguments("--headless=new");
                 }
@@ -55,9 +56,13 @@ public final class DriverFactory {
             default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
 
+        configureDriver(driver);
+        DRIVER.set(driver);
+    }
+
+    private static void configureDriver(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getInt("pageLoadTimeout", 60)));
         driver.manage().window().maximize();
-        DRIVER.set(driver);
     }
 
     public static WebDriver getDriver() {

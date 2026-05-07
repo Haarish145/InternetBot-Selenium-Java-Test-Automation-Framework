@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CheckboxPage extends BasePage {
+    private static final String OPTION_ONE = "Option 1";
+
     @FindBy(linkText = "Checkboxes")
     private WebElement checkboxesLink;
 
@@ -50,11 +52,15 @@ public class CheckboxPage extends BasePage {
     }
 
     public void selectOptionOne() {
-        selectDropdownByVisibleText(dropdown, "Option 1");
+        selectDropdownByVisibleText(dropdown, OPTION_ONE);
     }
 
     public String getSelectedDropdownOption() {
         return selectDropdown(dropdown).getFirstSelectedOption().getText();
+    }
+
+    public boolean isOptionOneSelected() {
+        return OPTION_ONE.equals(getSelectedDropdownOption());
     }
 
     public int getDropdownOptionCount() {

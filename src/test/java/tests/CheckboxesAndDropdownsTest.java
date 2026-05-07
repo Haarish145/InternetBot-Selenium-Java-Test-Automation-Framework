@@ -29,7 +29,7 @@ public class CheckboxesAndDropdownsTest extends BaseTest {
         checkboxPage.openDropdown();
         checkboxPage.selectOptionOne();
 
-        Assert.assertEquals(checkboxPage.getSelectedDropdownOption(), "Option 1");
+        Assert.assertTrue(checkboxPage.isOptionOneSelected(), "Dropdown should show Option 1 as selected.");
     }
 
     @Test

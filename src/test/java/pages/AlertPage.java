@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AlertPage extends BasePage {
+    private static final String JS_ALERT_RESULT = "You successfully clicked an alert";
+    private static final String JS_CONFIRM_CANCEL_RESULT = "You clicked: Cancel";
+
     @FindBy(linkText = "JavaScript Alerts")
     private WebElement javaScriptAlertsLink;
 
@@ -49,5 +52,17 @@ public class AlertPage extends BasePage {
 
     public String getResultText() {
         return getText(resultText);
+    }
+
+    public boolean hasAlertAcceptedMessage() {
+        return JS_ALERT_RESULT.equals(getResultText());
+    }
+
+    public boolean hasConfirmCancelledMessage() {
+        return JS_CONFIRM_CANCEL_RESULT.equals(getResultText());
+    }
+
+    public boolean hasPromptText(String text) {
+        return ("You entered: " + text).equals(getResultText());
     }
 }

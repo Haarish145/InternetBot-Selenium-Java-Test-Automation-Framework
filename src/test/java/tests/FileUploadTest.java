@@ -11,11 +11,12 @@ import java.nio.file.Path;
 public class FileUploadTest extends BaseTest {
     @Test
     public void UPLOAD_TC_01_uploadValidFileDisplaysFilename() {
+        String uploadFileName = ConfigReader.get("uploadFileName");
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openFileUpload();
-        uploadPage.uploadFile(resourcePath(ConfigReader.get("uploadFileName")));
+        uploadPage.uploadFile(resourcePath(uploadFileName));
 
-        Assert.assertEquals(uploadPage.getUploadedFilename(), ConfigReader.get("uploadFileName"));
+        Assert.assertEquals(uploadPage.getUploadedFilename(), uploadFileName);
     }
 
     @Test
@@ -28,12 +29,13 @@ public class FileUploadTest extends BaseTest {
 
     @Test
     public void UPLOAD_TC_03_uploadUnsupportedFileTypeHandledGracefully() {
+        String unsupportedUploadFileName = ConfigReader.get("unsupportedUploadFileName");
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openFileUpload();
-        uploadPage.uploadFile(resourcePath(ConfigReader.get("unsupportedUploadFileName")));
+        uploadPage.uploadFile(resourcePath(unsupportedUploadFileName));
 
         Assert.assertEquals(uploadPage.getUploadResultHeading(), "File Uploaded!");
-        Assert.assertEquals(uploadPage.getUploadedFilename(), ConfigReader.get("unsupportedUploadFileName"));
+        Assert.assertEquals(uploadPage.getUploadedFilename(), unsupportedUploadFileName);
     }
 
     private Path resourcePath(String fileName) {

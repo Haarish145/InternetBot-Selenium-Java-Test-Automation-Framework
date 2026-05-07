@@ -6,13 +6,15 @@ import org.testng.annotations.Test;
 import pages.AlertPage;
 
 public class JavaScriptAlertsTest extends BaseTest {
+    private static final String PROMPT_TEXT = "InternetBot";
+
     @Test
     public void ALERT_TC_01_acceptJsAlertShowsSuccessfulAction() {
         AlertPage alertPage = new AlertPage(driver);
         alertPage.openJavaScriptAlerts();
         alertPage.acceptJsAlert();
 
-        Assert.assertEquals(alertPage.getResultText(), "You successfully clicked an alert");
+        Assert.assertTrue(alertPage.hasAlertAcceptedMessage(), "Alert result should confirm the alert was accepted.");
     }
 
     @Test
@@ -21,16 +23,16 @@ public class JavaScriptAlertsTest extends BaseTest {
         alertPage.openJavaScriptAlerts();
         alertPage.dismissJsConfirm();
 
-        Assert.assertEquals(alertPage.getResultText(), "You clicked: Cancel");
+        Assert.assertTrue(alertPage.hasConfirmCancelledMessage(), "Confirm result should show that cancel was clicked.");
     }
 
     @Test
     public void ALERT_TC_03_enterTextInJsPromptDisplaysEnteredText() {
         AlertPage alertPage = new AlertPage(driver);
         alertPage.openJavaScriptAlerts();
-        alertPage.enterPromptText("InternetBot");
+        alertPage.enterPromptText(PROMPT_TEXT);
 
-        Assert.assertEquals(alertPage.getResultText(), "You entered: InternetBot");
+        Assert.assertTrue(alertPage.hasPromptText(PROMPT_TEXT), "Prompt result should include the entered text.");
     }
 
     @Test
@@ -38,9 +40,9 @@ public class JavaScriptAlertsTest extends BaseTest {
         AlertPage alertPage = new AlertPage(driver);
         alertPage.openJavaScriptAlerts();
         alertPage.acceptJsAlert();
-        Assert.assertEquals(alertPage.getResultText(), "You successfully clicked an alert");
+        Assert.assertTrue(alertPage.hasAlertAcceptedMessage(), "Alert result should confirm the alert was accepted.");
 
         alertPage.dismissJsConfirm();
-        Assert.assertEquals(alertPage.getResultText(), "You clicked: Cancel");
+        Assert.assertTrue(alertPage.hasConfirmCancelledMessage(), "Confirm result should show that cancel was clicked.");
     }
 }

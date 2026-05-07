@@ -58,7 +58,8 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isInvalidLoginMessageDisplayed() {
-        return getFlashMessage().contains("Your username is invalid!") || getFlashMessage().contains("Your password is invalid!");
+        String message = getFlashMessage();
+        return message.contains("Your username is invalid!") || message.contains("Your password is invalid!");
     }
 
     public void logout() {

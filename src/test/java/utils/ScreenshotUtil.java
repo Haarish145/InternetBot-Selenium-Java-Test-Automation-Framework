@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +24,7 @@ public final class ScreenshotUtil {
             File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             String safeName = testName.replaceAll("[^a-zA-Z0-9._-]", "_");
             Path destination = Path.of("screenshots", safeName + "_" + LocalDateTime.now().format(FORMATTER) + ".png");
-            Files.copy(source.toPath(), destination);
+            Files.copy(source.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
             return destination.toString();
         } catch (IOException exception) {
             throw new IllegalStateException("Unable to capture screenshot.", exception);

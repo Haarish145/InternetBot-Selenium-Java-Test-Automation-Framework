@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import utils.ConfigReader;
 import utils.WaitUtility;
 
 public abstract class BasePage {
@@ -15,6 +16,10 @@ public abstract class BasePage {
         this.driver = driver;
         this.waitUtility = new WaitUtility(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    protected void openHomePage() {
+        driver.navigate().to(ConfigReader.get("baseUrl"));
     }
 
     protected WebElement waitForElement(WebElement element) {

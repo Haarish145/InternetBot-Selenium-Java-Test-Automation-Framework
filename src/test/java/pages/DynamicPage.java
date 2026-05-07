@@ -49,7 +49,7 @@ public class DynamicPage extends BasePage {
     }
 
     public void openDisappearingElements() {
-        driver.navigate().to(utils.ConfigReader.get("baseUrl"));
+        openHomePage();
         clickElement(disappearingElementsLink);
     }
 
@@ -61,7 +61,7 @@ public class DynamicPage extends BasePage {
                 }
                 driver.navigate().refresh();
                 return false;
-            } catch (Exception exception) {
+            } catch (RuntimeException exception) {
                 driver.navigate().refresh();
                 return false;
             }
@@ -69,7 +69,7 @@ public class DynamicPage extends BasePage {
     }
 
     public void openDynamicContent() {
-        driver.navigate().to(utils.ConfigReader.get("baseUrl"));
+        openHomePage();
         clickElement(dynamicContentLink);
     }
 
