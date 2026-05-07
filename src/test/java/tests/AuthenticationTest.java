@@ -6,10 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.ConfigReader;
-import utils.RetryAnalyzer;
 
 public class AuthenticationTest extends BaseTest {
-    @Test(dataProvider = "loginCredentials", dataProviderClass = LoginDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "loginCredentials", dataProviderClass = LoginDataProvider.class)
     public void AUTH_TC_01_02_verifyLoginWithCredentialSet(String username, String password, boolean validCredential) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openFormAuthentication();
@@ -22,7 +21,7 @@ public class AuthenticationTest extends BaseTest {
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void AUTH_TC_03_verifySuccessMessageAfterSuccessfulLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openFormAuthentication();
@@ -31,7 +30,7 @@ public class AuthenticationTest extends BaseTest {
         Assert.assertTrue(loginPage.isSuccessMessageDisplayed(), "Success alert message should appear.");
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void AUTH_TC_04_verifyLogoutRedirectsToLoginPage() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openFormAuthentication();

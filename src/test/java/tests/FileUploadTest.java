@@ -5,12 +5,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.UploadPage;
 import utils.ConfigReader;
-import utils.RetryAnalyzer;
 
 import java.nio.file.Path;
 
 public class FileUploadTest extends BaseTest {
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void UPLOAD_TC_01_uploadValidFileDisplaysFilename() {
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openFileUpload();
@@ -19,7 +18,7 @@ public class FileUploadTest extends BaseTest {
         Assert.assertEquals(uploadPage.getUploadedFilename(), ConfigReader.get("uploadFileName"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void UPLOAD_TC_02_verifyUploadPageTitle() {
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openFileUpload();
@@ -27,7 +26,7 @@ public class FileUploadTest extends BaseTest {
         Assert.assertTrue(uploadPage.isUploadPageDisplayed(), "Upload page should load correctly.");
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void UPLOAD_TC_03_uploadUnsupportedFileTypeHandledGracefully() {
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openFileUpload();
